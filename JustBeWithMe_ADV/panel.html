@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sidekick Workspace</title>
+    <link rel="stylesheet" href="panel.css">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <!-- HEADER -->
+        <header class="app-header">
+            <div class="brand">
+                <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+                <span class="brand-name">Sidekick</span>
+            </div>
+
+            <div class="header-controls">
+                <button id="focus-mode-btn" class="focus-toggle-btn" title="Toggle Focus Mode">📺 Focus Mode</button>
+
+                <select id="theme-select" class="control-select" title="Change Theme">
+                    <option value="system">🌓 Auto</option>
+                    <option value="light">☀️ Light</option>
+                    <option value="dark">🌙 Dark</option>
+                </select>
+
+                <select id="dock-select" class="control-select" title="Dock Position">
+                    <option value="right">Dock Right</option>
+                    <option value="left">Dock Left</option>
+                    <option value="top">Dock Top</option>
+                    <option value="bottom">Dock Bottom</option>
+                </select>
+
+                <!-- Close button to minimize/close the panel -->
+                <button id="close-panel-btn" class="close-panel-btn" title="Close Panel">&times;</button>
+            </div>
+        </header>
+
+        <!-- SEARCH SUITE (Always available at the top of content) -->
+        <div class="search-suite-box">
+            <div class="search-row">
+                <input type="text" id="unified-search-input" placeholder="Search across Workspace...">
+                <select id="search-type-select" class="search-select">
+                    <option value="keyword">Keyword</option>
+                    <option value="fuzzy">Fuzzy</option>
+                    <option value="semantic">Semantic</option>
+                    <option value="tag">#Tag</option>
+                </select>
+                <button id="trigger-search-btn">Find</button>
+            </div>
+            <div id="search-results-output" class="search-results hidden"></div>
+        </div>
+
+        <!-- NAVIGATION TABS -->
+        <nav class="app-tabs">
+            <button class="tab-btn active" data-tab="onenote">
+                <span>OneNote</span>
+            </button>
+            <button class="tab-btn" data-tab="keep">
+                <span>Keep</span>
+            </button>
+            <button class="tab-btn" data-tab="docs">
+                <span>Docs</span>
+            </button>
+            <button class="tab-btn" data-tab="flashcards">
+                <span>Cards</span>
+            </button>
+            <button class="tab-btn" data-tab="canvas">
+                <span>Canvas</span>
+            </button>
+            <button class="tab-btn" data-tab="scheduler">
+                <span>Schedule</span>
+            </button>
+            <button class="tab-btn" data-tab="tools">
+                <span>Tools</span>
+            </button>
+            <button class="tab-btn" data-tab="reminders">
+                <span>Alerts</span>
+            </button>
+        </nav>
+
+        <!-- MAIN PANES -->
+        <main class="app-content">
+
+            <!-- 1. MICROSOFT ONENOTE -->
+            <section id="tab-onenote" class="tab-pane active">
+                <div class="onenote-container">
+                    <div class="onenote-sidebar">
+                        <div class="pane-section-header">
+                            <span>Pages</span>
+                            <button id="add-section-btn" class="icon-btn">+</button>
+                        </div>
+                        <ul id="onenote-pages" class="sidebar-list"></ul>
+                    </div>
+                    <div class="onenote-editor">
+                        <input type="text" id="onenote-title-input" class="pane-title-input"
+                            placeholder="Page Title...">
+                        <textarea id="onenote-body-input" class="pane-textarea"
+                            placeholder="Start typing..."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. GOOGLE KEEP -->
+            <section id="tab-keep" class="tab-pane">
+                <div class="keep-composer">
+                    <input type="text" id="keep-title" placeholder="Title">
+                    <textarea id="keep-text" placeholder="Take a note..." rows="2"></textarea>
+                    <div class="keep-controls-row">
+                        <div class="color-options">
+                            <span class="color-dot active" data-color="default"
+                                style="background:var(--bg-card)"></span>
+                            <span class="color-dot" data-color="yellow" style="background:#fef08a"></span>
+                            <span class="color-dot" data-color="blue" style="background:#bfdbfe"></span>
+                            <span class="color-dot" data-color="green" style="background:#bbf7d0"></span>
+                            <span class="color-dot" data-color="red" style="background:#fecaca"></span>
+                        </div>
+                        <button id="keep-save-btn">Pin Note</button>
+                    </div>
+                </div>
+                <div id="keep-grid" class="keep-grid"></div>
+            </section>
+
+            <!-- 3. GOOGLE DOCS -->
+            <section id="tab-docs" class="tab-pane">
+                <div class="docs-toolbar">
+                    <button class="format-btn" id="format-bold" data-cmd="bold"><b>B</b></button>
+                    <button class="format-btn" id="format-italic" data-cmd="italic"><i>I</i></button>
+                    <button class="format-btn" id="format-underline" data-cmd="underline"><u>U</u></button>
+                    <button class="format-btn" data-cmd="insertUnorderedList">• List</button>
+                    <button class="format-btn" data-cmd="insertHorizontalRule">―</button>
+                    <button class="format-btn" data-cmd="removeFormat">🧹</button>
+                    <span class="divider"></span>
+                    <button id="doc-export-btn" class="format-btn secondary">💾 Export</button>
+                </div>
+                <div id="docs-editor" contenteditable="true" placeholder="Start writing a beautiful document here...">
+                </div>
+            </section>
+
+            <!-- 4. FLASHCARDS -->
+            <section id="tab-flashcards" class="tab-pane">
+                <div class="flashcards-layout">
+                    <div class="panel-section-box">
+                        <h3 class="pane-subtitle">Manage Decks</h3>
+                        <div class="entry-row" style="margin-bottom:8px;">
+                            <input type="text" id="deck-name-input" placeholder="New Deck Title...">
+                            <button id="add-deck-btn">Create</button>
+                        </div>
+                        <div class="entry-row" style="margin-bottom:8px; gap: 4px;">
+                            <select id="deck-select-dropdown" class="pane-dropdown" style="flex:1;"></select>
+                            <button id="remove-deck-btn" class="tool-btn danger" style="padding: 10px;"
+                                title="Delete active deck">🗑️ Delete</button>
+                        </div>
+                        <div class="card-composer-box">
+                            <input type="text" id="card-front-input" placeholder="Front Face (Question...)">
+                            <input type="text" id="card-back-input" placeholder="Back Face (Answer...)">
+                            <button id="add-card-btn" class="wide-btn">Add Card to Deck</button>
+                        </div>
+                    </div>
+
+                    <div class="study-box">
+                        <h3 class="pane-subtitle">Study Mode</h3>
+                        <div id="flashcard-viewer-3d" class="flashcard-3d">
+                            <div class="flashcard-3d-inner" id="card-inner-node">
+                                <div class="flashcard-3d-front" id="card-front-node">Add a card to begin practicing!
+                                </div>
+                                <div class="flashcard-3d-back" id="card-back-node">Click flip to see answers.</div>
+                            </div>
+                        </div>
+                        <div class="study-controls">
+                            <button id="study-prev-btn" class="secondary-btn">←</button>
+                            <button id="study-flip-btn">Flip Card</button>
+                            <button id="study-next-btn" class="secondary-btn">→</button>
+                        </div>
+                        <div class="study-progress">
+                            <div class="progress-bar-bg">
+                                <div id="progress-bar-fill" class="progress-bar-fill"></div>
+                            </div>
+                            <span id="study-progress-text" class="progress-text">Card 0 of 0</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. ROUGH BOARD -->
+            <section id="tab-canvas" class="tab-pane">
+                <div class="canvas-toolbar">
+                    <div class="tool-group">
+                        <button id="tool-draw" class="tool-btn active">✏️</button>
+                        <button id="tool-erase" class="tool-btn">🧼</button>
+                    </div>
+                    <div class="tool-group">
+                        <span class="tool-label">Brush:</span>
+                        <input type="range" id="canvas-brush" min="1" max="15" value="3">
+                    </div>
+                    <div class="tool-group">
+                        <span class="tool-label">Palette:</span>
+                        <input type="color" id="canvas-color" value="#4f46e5">
+                    </div>
+                    <button id="canvas-clear" class="tool-btn danger" style="margin-left:auto;">Clear Board</button>
+                </div>
+                <div class="canvas-wrapper">
+                    <canvas id="rough-board"></canvas>
+                </div>
+            </section>
+
+            <!-- 6. ADVANCED SCHEDULER & WORKLOAD OPTIMIZER -->
+            <section id="tab-scheduler" class="tab-pane">
+                <div class="scheduler-layout">
+                    <div class="panel-section-box">
+                        <h3 class="pane-subtitle">Add New Task Entry</h3>
+                        <input type="text" id="sched-title-input" placeholder="Task summary...">
+                        <div class="entry-row">
+                            <select id="sched-priority-input" class="pane-dropdown" title="Select Priority">
+                                <option value="high">🔥 High Priority</option>
+                                <option value="medium">⚡ Medium Priority</option>
+                                <option value="low">🌱 Low Priority</option>
+                            </select>
+                            <input type="number" id="sched-time-input" placeholder="Time (Hrs)" min="0.5" step="0.5">
+                            <input type="number" id="sched-effort-input" placeholder="Effort (1-10)" min="1" max="10">
+                        </div>
+                        <div class="entry-row">
+                            <input type="datetime-local" id="sched-deadline-input" title="Deadline input">
+                            <button id="sched-add-btn">Add Task</button>
+                        </div>
+                    </div>
+
+                    <!-- Optimization Advisory Center -->
+                    <div class="panel-section-box optimization-center">
+                        <h3 class="pane-subtitle">Smart Scheduling & Workload Analytics</h3>
+                        <div id="optimizer-advisory-output" class="optimization-status">Analyzing workloads...</div>
+                    </div>
+
+                    <!-- Active Scheduled Tasks List -->
+                    <div id="scheduler-items-list" class="styled-list"></div>
+                </div>
+            </section>
+
+            <!-- 7. STUDY & WORKSPACE TOOLS -->
+            <section id="tab-tools" class="tab-pane">
+                <div class="tools-grid">
+                    <!-- Song Recorder Widget -->
+                    <div class="panel-section-box">
+                        <h3 class="pane-subtitle">Song Notes Audio Recorder</h3>
+                        <p class="tool-explanation">Record song notes. Capture only your voice, or merge your voice and
+                            system audio into one file.</p>
+                        <div class="recorder-controls-row">
+                            <button id="rec-mic-btn" class="pomo-btn">🎙️ Record Mic Only</button>
+                            <button id="rec-system-btn" class="pomo-btn secondary-btn">🎵 Record Mic + System</button>
+                        </div>
+                        <div id="recorder-status" class="recorder-status-inactive">Status: Idle</div>
+                        <div class="recording-player-box">
+                            <button id="rec-stop-btn" class="pomo-btn danger" disabled>Stop</button>
+                            <audio id="recording-playback" controls style="width:100%; display:none;"></audio>
+                        </div>
+                    </div>
+
+                    <!-- Web Clipper -->
+                    <div class="panel-section-box">
+                        <h3 class="pane-subtitle">Notion Web Clipper</h3>
+                        <div class="clipper-controls">
+                            <button id="clipper-page-btn" class="wide-btn">Clip Web Page details</button>
+                            <button id="clipper-selection-btn" class="wide-btn secondary-btn">Clip Highlighted
+                                Text</button>
+                        </div>
+                    </div>
+
+                    <!-- Clocks sub-views -->
+                    <div class="panel-section-box">
+                        <h3 class="pane-subtitle">Stopwatch & Countdown timers</h3>
+                        <div class="timing-tabs">
+                            <button id="subtab-pomo" class="sub-btn active">Pomodoro</button>
+                            <button id="subtab-timer" class="sub-btn">Countdown</button>
+                            <button id="subtab-stopwatch" class="sub-btn">Stopwatch</button>
+                        </div>
+
+                        <div id="clock-pomo-view" class="clock-panel-inner">
+                            <div class="pomo-display-box">
+                                <span id="pomo-clock">25:00</span>
+                                <span class="pomo-tag">Focus</span>
+                            </div>
+                            <div class="pomo-controls">
+                                <button id="pomo-start-btn">Start</button>
+                                <button id="pomo-pause-btn" class="secondary-btn">Pause</button>
+                                <button id="pomo-reset-btn" class="secondary-btn">Reset</button>
+                            </div>
+                        </div>
+
+                        <div id="clock-timer-view" class="clock-panel-inner hidden">
+                            <div class="pomo-display-box">
+                                <span id="timer-clock">05:00</span>
+                            </div>
+                            <div class="entry-row" style="margin-bottom:8px;">
+                                <input type="number" id="timer-input-mins" min="0" max="180" value="5"
+                                    style="width:50%;">
+                                <input type="number" id="timer-input-secs" min="0" max="59" value="0"
+                                    style="width:50%;">
+                            </div>
+                            <div class="pomo-controls">
+                                <button id="timer-start-btn">Start</button>
+                                <button id="timer-pause-btn" class="secondary-btn">Pause</button>
+                                <button id="timer-reset-btn" class="secondary-btn">Reset</button>
+                            </div>
+                        </div>
+
+                        <div id="clock-stopwatch-view" class="clock-panel-inner hidden">
+                            <div class="pomo-display-box">
+                                <span id="stopwatch-clock">00:00.00</span>
+                            </div>
+                            <div class="pomo-controls">
+                                <button id="stopwatch-start-btn">Start</button>
+                                <button id="stopwatch-pause-btn" class="secondary-btn">Pause</button>
+                                <button id="stopwatch-reset-btn" class="secondary-btn">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Memory Management Utilities -->
+                    <div class="panel-section-box">
+                        <h3 class="pane-subtitle">Extension System Memory</h3>
+                        <p class="tool-explanation">Manage local storage and clear the extension memory cache.</p>
+                        <button id="sys-clear-storage" class="tool-btn danger wide-btn">Clear All Local Storage
+                            Data</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. ALERTS (CALENDAR, ROUTINES, REMINDERS) -->
+            <section id="tab-reminders" class="tab-pane">
+                <!-- Interactive Event Calendar Widget -->
+                <div class="panel-section-box">
+                    <h3 class="pane-subtitle">Event Calendar</h3>
+                    <div class="calendar-nav-row">
+                        <button id="cal-prev-month">◄</button>
+                        <h4 id="calendar-month-title">Month Year</h4>
+                        <button id="cal-next-month">►</button>
+                    </div>
+                    <div class="calendar-grid-header">
+                        <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+                    </div>
+                    <div id="calendar-days-grid" class="calendar-days-grid"></div>
+
+                    <div id="calendar-event-form" class="calendar-event-form hidden">
+                        <h4 id="cal-selected-date-label">Schedule Event</h4>
+                        <div class="entry-row" style="margin-top:6px;">
+                            <input type="text" id="cal-event-text" placeholder="Event description...">
+                            <button id="cal-save-event-btn">Save Event</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="reminders-split" style="margin-top:16px;">
+                    <!-- Routines List -->
+                    <div class="sub-column">
+                        <h3 class="pane-subtitle">Daily Habits (Google Tasks Style)</h3>
+                        <div class="entry-row vertical" style="gap:4px;">
+                            <input type="text" id="routine-input" placeholder="New habit to build...">
+                            <div class="entry-row">
+                                <input type="time" id="routine-alert-time" title="Alert daily time">
+                                <button id="add-routine-btn">Add Task</button>
+                            </div>
+                        </div>
+                        <div id="routines-list" class="styled-list"></div>
+                    </div>
+
+                    <!-- Alarms List -->
+                    <div class="sub-column">
+                        <h3 class="pane-subtitle">Alerts & Reminders</h3>
+                        <div class="entry-row vertical">
+                            <input type="text" id="remind-text" placeholder="Task alert summary...">
+                            <div class="entry-row">
+                                <input type="datetime-local" id="remind-time">
+                                <button id="add-reminder-btn">Schedule</button>
+                            </div>
+                        </div>
+                        <div id="reminders-list" class="styled-list"></div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- ON-SCREEN INTERRUPTIVE ALERTS POPUP MODAL -->
+        <div id="on-screen-alert-modal" class="alert-modal-overlay hidden">
+            <div class="alert-modal">
+                <div class="alert-modal-header">⚠️ Task Alert Notification</div>
+                <div class="alert-modal-body" id="alert-modal-content">No notification contents active.</div>
+                <div class="alert-modal-footer">
+                    <button id="alert-modal-close">Acknowledge</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="panel.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="panel.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header / Navigation -->
+        <header class="navbar">
+            <div class="logo">Sidekick</div>
+            <div class="dock-controls">
+                <label for="dock-select">Dock:</label>
+                <select id="dock-select">
+                    <option value="right" selected>Right</option>
+                    <option value="left">Left</option>
+                    <option value="top">Top</option>
+                    <option value="bottom">Bottom</option>
+                </select>
+            </div>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="notes">Notes</button>
+            <button class="tab-btn" data-tab="routines">Routines</button>
+            <button class="tab-btn" data-tab="flashcards">Flashcards</button>
+            <button class="tab-btn" data-tab="reminders">Reminders</button>
+        </nav>
+
+        <!-- App Content Modules -->
+        <main class="content-area">
+
+            <!-- Notes Section (Notion/Keep hybrid) -->
+            <section id="tab-notes" class="tab-content active">
+                <div class="input-row">
+                    <input type="text" id="note-title" placeholder="Note Title...">
+                    <button id="save-note-btn">Save</button>
+                </div>
+                <textarea id="note-body"
+                    placeholder="Write rich ideas here (supports simple text formatting)..."></textarea>
+                <div id="notes-list" class="item-list"></div>
+            </section>
+
+            <!-- Routines Section (Keep Checklists) -->
+            <section id="tab-routines" class="tab-content">
+                <div class="input-row">
+                    <input type="text" id="routine-input" placeholder="Add daily routine or task...">
+                    <button id="add-routine-btn">Add</button>
+                </div>
+                <div id="routines-list" class="item-list"></div>
+            </section>
+
+            <!-- Flashcard Section (Quizlet hybrid) -->
+            <section id="tab-flashcards" class="tab-content">
+                <div class="card-creator">
+                    <input type="text" id="flash-front" placeholder="Front Side (Question)">
+                    <input type="text" id="flash-back" placeholder="Back Side (Answer)">
+                    <button id="add-card-btn">Add Card</button>
+                </div>
+                <div class="quiz-mode">
+                    <button id="quiz-toggle-btn">Toggle Flashcard View</button>
+                    <div id="flashcard-viewer" class="flashcard hidden">
+                        <div class="flashcard-inner" id="card-inner">
+                            <div class="flashcard-front" id="card-front">Front</div>
+                            <div class="flashcard-back" id="card-back">Back</div>
+                        </div>
+                    </div>
+                    <div class="card-controls hidden" id="card-controls">
+                        <button id="prev-card-btn">←</button>
+                        <button id="flip-card-btn">Flip</button>
+                        <button id="next-card-btn">→</button>
+                    </div>
+                </div>
+                <div id="cards-list" class="item-list"></div>
+            </section>
+
+            <!-- Reminders Section (Date/Time alerts) -->
+            <section id="tab-reminders" class="tab-content">
+                <div class="reminder-creator">
+                    <input type="text" id="remind-text" placeholder="Reminder text...">
+                    <div class="datetime-row">
+                        <input type="datetime-local" id="remind-time">
+                        <button id="add-reminder-btn">Set</button>
+                    </div>
+                </div>
+                <div id="reminders-list" class="item-list"></div>
+            </section>
+
+        </main>
+    </div>
+    <script src="panel.js"></script>
+</body>
+
+</html>

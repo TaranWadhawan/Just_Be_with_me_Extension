@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="system">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sidekick Workspace</title>
+    <link rel="stylesheet" href="panel.css">
+</head>
+
+<body>
+    <div class="app-container">
+
+        <!-- HEADER -->
+        <header class="app-header">
+            <div class="brand">
+                <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+                <span class="brand-name">Sidekick</span>
+            </div>
+
+            <div class="header-controls">
+                <select id="theme-select" class="control-select" title="Change Theme">
+                    <option value="system">🌓 Auto</option>
+                    <option value="light">☀️ Light</option>
+                    <option value="dark">🌙 Dark</option>
+                </select>
+
+                <select id="dock-select" class="control-select" title="Dock Position">
+                    <option value="right">Dock Right</option>
+                    <option value="left">Dock Left</option>
+                    <option value="top">Dock Top</option>
+                    <option value="bottom">Dock Bottom</option>
+                </select>
+            </div>
+        </header>
+
+        <!-- NAVIGATION TABS -->
+        <nav class="app-tabs">
+            <button class="tab-btn active" data-tab="onenote" title="OneNote: Notebooks">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20M4 19.5A2.5 2.5 0 0 0 6.5 22H20M4 19.5V3a1 1 0 0 1 1-1h15v20H6.5a2.5 2.5 0 0 1-2.5-2.5z" />
+                </svg>
+                <span>OneNote</span>
+            </button>
+            <button class="tab-btn" data-tab="keep" title="Keep: Quick Grid">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1 .3 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5h4z" />
+                    <path d="M9 18h6M10 22h4" />
+                </svg>
+                <span>Keep</span>
+            </button>
+            <button class="tab-btn" data-tab="docs" title="Docs: Editor">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                </svg>
+                <span>Docs</span>
+            </button>
+            <button class="tab-btn" data-tab="flashcards" title="Flashcards: Study Deck Engine">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                    <line x1="9" y1="9" x2="15" y2="9" />
+                    <line x1="9" y1="13" x2="15" y2="13" />
+                    <line x1="9" y1="17" x2="13" y2="17" />
+                </svg>
+                <span>Cards</span>
+            </button>
+            <button class="tab-btn" data-tab="canvas" title="Canvas: Sketchpad">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" />
+                </svg>
+                <span>Canvas</span>
+            </button>
+            <button class="tab-btn" data-tab="tools" title="Workspace Tools">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3" />
+                    <path
+                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                </svg>
+                <span>Tools</span>
+            </button>
+            <button class="tab-btn" data-tab="reminders" title="Routines & Alarms">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0" />
+                </svg>
+                <span>Alerts</span>
+            </button>
+        </nav>
+
+        <!-- VIEWS CONTAINER -->
+        <main class="app-content">
+
+            <!-- 1. MICROSOFT ONENOTE -->
+            <section id="tab-onenote" class="tab-pane active">
+                <div class="onenote-container">
+                    <div class="onenote-sidebar">
+                        <div class="pane-section-header">
+                            <span>Notebooks</span>
+                            <button id="add-section-btn" class="icon-btn" title="New Page">+</button>
+                        </div>
+                        <ul id="onenote-pages" class="sidebar-list"></ul>
+                    </div>
+                    <div class="onenote-editor">
+                        <input type="text" id="onenote-title-input" class="pane-title-input"
+                            placeholder="Page Title...">
+                        <textarea id="onenote-body-input" class="pane-textarea"
+                            placeholder="Start typing thoughts here..."></textarea>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. GOOGLE KEEP -->
+            <section id="tab-keep" class="tab-pane">
+                <div class="keep-composer">
+                    <input type="text" id="keep-title" placeholder="Title">
+                    <textarea id="keep-text" placeholder="Take a note..." rows="2"></textarea>
+                    <div class="keep-controls-row">
+                        <div class="color-options">
+                            <span class="color-dot active" data-color="default"
+                                style="background:var(--bg-card)"></span>
+                            <span class="color-dot" data-color="yellow" style="background:#fef08a"></span>
+                            <span class="color-dot" data-color="blue" style="background:#bfdbfe"></span>
+                            <span class="color-dot" data-color="green" style="background:#bbf7d0"></span>
+                            <span class="color-dot" data-color="red" style="background:#fecaca"></span>
+                        </div>
+                        <button id="keep-save-btn">Pin Note</button>
+                    </div>
+                </div>
+                <div id="keep-grid" class="keep-grid"></div>
+            </section>
+
+            <!-- 3. GOOGLE DOCS -->
+            <section id="tab-docs" class="tab-pane">
+                <div class="docs-toolbar">
+                    <button class="format-btn" data-cmd="bold"><b>B</b></button>
+                    <button class="format-btn" data-cmd="italic"><i>I</i></button>
+                    <button class="format-btn" data-cmd="underline"><u>U</u></button>
+                    <button class="format-btn" data-cmd="insertUnorderedList">• List</button>
+                    <button class="format-btn" data-cmd="insertHorizontalRule">―</button>
+                    <button class="format-btn" data-cmd="removeFormat">🧹</button>
+                    <span class="divider"></span>
+                    <button id="doc-export-btn" class="format-btn secondary">💾 Export</button>
+                </div>
+                <div id="docs-editor" contenteditable="true" placeholder="Start writing a beautiful document here...">
+                </div>
+            </section>
+
+            <!-- 4. FLASHCARDS (QUIZLET-LITE) -->
+            <section id="tab-flashcards" class="tab-pane">
+                <div class="flashcards-layout">
+                    <!-- Deck Selection & Card Inputs -->
+                    <div class="panel-section-box">
+                        <h3 class="pane-subtitle">Manage Decks</h3>
+                        <div class="entry-row" style="margin-bottom:8px;">
+                            <input type="text" id="deck-name-input" placeholder="New Deck Title...">
+                            <button id="add-deck-btn">Create</button>
+                        </div>
+                        <div class="entry-row" style="margin-bottom:8px;">
+                            <select id="deck-select-dropdown" class="pane-dropdown" title="Select Active Deck"></select>
+                        </div>
+                        <div class="card-composer-box">
+                            <input type="text" id="card-front-input" placeholder="Front Face (Question...)">
+                            <input type="text" id="card-back-input" placeholder="Back Face (Answer...)">
+                            <button id="add-card-btn" class="wide-btn">Add Card to Deck</button>
+                        </div>
+                    </div>
+
+                    <!-- Study Viewer -->
+                    <div class="study-box">
+                        <h3 class="pane-subtitle">Study Mode</h3>
+                        <div id="flashcard-viewer-3d" class="flashcard-3d">
+                            <div class="flashcard-3d-inner" id="card-inner-node">
+                                <div class="flashcard-3d-front" id="card-front-node">Add a card to begin practicing!
+                                </div>
+                                <div class="flashcard-3d-back" id="card-back-node">Click flip to see answers.</div>
+                            </div>
+                        </div>
+                        <div class="study-controls">
+                            <button id="study-prev-btn" class="secondary-btn">←</button>
+                            <button id="study-flip-btn">Flip Card</button>
+                            <button id="study-next-btn" class="secondary-btn">→</button>
+                        </div>
+                        <div class="study-progress">
+                            <div class="progress-bar-bg">
+                                <div id="progress-bar-fill" class="progress-bar-fill"></div>
+                            </div>
+                            <span id="study-progress-text" class="progress-text">Card 0 of 0</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. ROUGH BOARD (CANVAS) -->
+            <section id="tab-canvas" class="tab-pane">
+                <div class="canvas-toolbar">
+                    <div class="tool-group">
+                        <button id="tool-draw" class="tool-btn active">✏️</button>
+                        <button id="tool-erase" class="tool-btn">🧼</button>
+                    </div>
+                    <div class="tool-group">
+                        <span class="tool-label">Brush:</span>
+                        <input type="range" id="canvas-brush" min="1" max="15" value="3">
+                    </div>
+                    <div class="tool-group">
+                        <span class="tool-label">Palette:</span>
+                        <input type="color" id="canvas-color" value="#4f46e5">
+                    </div>
+                    <button id="canvas-clear" class="tool-btn danger" style="margin-left:auto;">Clear Board</button>
+                </div>
+                <div class="canvas-wrapper">
+                    <canvas id="rough-board"></canvas>
+                </div>
+            </section>
+
+            <!-- 6. STUDY & WORKSPACE TOOLS -->
+            <section id="tab-tools" class="tab-pane">
+                <div class="tools-grid">
+
+                    <!-- Notion Web Clipper -->
+                    <div class="panel-section-box">
+                        <h3 class="pane-subtitle">Web Clipper</h3>
+                        <p class="tool-explanation">Clips page metadata or selected website snippets directly into your
+                            Docs editor.</p>
+                        <div class="clipper-controls">
+                            <button id="clipper-page-btn" class="wide-btn">Clip Entire Web Page Details</button>
+                            <button id="clipper-selection-btn" class="wide-btn secondary-btn">Clip Highlighted
+                                Text</button>
+                        </div>
+                    </div>
+
+                    <!-- Pomodoro Timer -->
+                    <div class="panel-section-box">
+                        <h3 class="pane-subtitle">Focus Pomodoro</h3>
+                        <div class="pomo-display-box">
+                            <span id="pomo-clock">25:00</span>
+                            <span id="pomo-label" class="pomo-tag">Focus</span>
+                        </div>
+                        <div class="pomo-controls">
+                            <button id="pomo-start-btn">Start</button>
+                            <button id="pomo-pause-btn" class="secondary-btn">Pause</button>
+                            <button id="pomo-reset-btn" class="secondary-btn">Reset</button>
+                        </div>
+                    </div>
+
+                    <!-- Ambient Sound Synthesizer -->
+                    <div class="panel-section-box">
+                        <h3 class="pane-subtitle">Ambient White Noise</h3>
+                        <p class="tool-explanation">Generates block-out noise locally using HTML5 synthesis to aid your
+                            concentration.</p>
+                        <div class="noise-panel-row">
+                            <button id="noise-toggle-btn" class="pomo-btn">Play White Noise</button>
+                            <div class="volume-slider-group">
+                                <span class="tool-label">Volume:</span>
+                                <input type="range" id="noise-volume" min="0" max="1" step="0.05" value="0.2">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- 7. ALERTS (RECURRING ROUTINES & SYSTEM REMINDERS) -->
+            <section id="tab-reminders" class="tab-pane">
+                <div class="reminders-split">
+                    <!-- Routines List -->
+                    <div class="sub-column">
+                        <h3 class="pane-subtitle">Daily Habits & Routines</h3>
+                        <div class="entry-row">
+                            <input type="text" id="routine-input" placeholder="New habit to build...">
+                            <button id="add-routine-btn">Track</button>
+                        </div>
+                        <div id="routines-list" class="styled-list"></div>
+                    </div>
+                    <!-- Alarms List -->
+                    <div class="sub-column">
+                        <h3 class="pane-subtitle">Alerts & Reminders</h3>
+                        <div class="entry-row vertical">
+                            <input type="text" id="remind-text" placeholder="Task alert summary...">
+                            <div class="entry-row">
+                                <input type="datetime-local" id="remind-time">
+                                <button id="add-reminder-btn">Schedule</button>
+                            </div>
+                        </div>
+                        <div id="reminders-list" class="styled-list"></div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+    <script src="panel.js"></script>
+</body>
+
+</html>

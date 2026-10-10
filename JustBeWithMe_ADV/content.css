@@ -1,0 +1,66 @@
+.sidekick-panel {
+    position: fixed !important;
+    z-index: 2147483646 !important;
+    border: none !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+    background: white !important;
+}
+
+/* Default bounds sizes */
+.sidekick-right {
+    top: 0 !important;
+    right: 0 !important;
+    width: 380px;
+    height: 100vh !important;
+}
+
+.sidekick-left {
+    top: 0 !important;
+    left: 0 !important;
+    width: 380px;
+    height: 100vh !important;
+}
+
+.sidekick-top {
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 280px;
+}
+
+.sidekick-bottom {
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 280px;
+}
+
+/* Fullscreen focus class overrides */
+.sidekick-fullscreen {
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+}
+
+/* Drag Handles */
+[id="sidekick-drag-handle"] {
+    position: fixed !important;
+    z-index: 2147483647 !important;
+    background: transparent;
+    transition: background 0.1s ease;
+}
+
+[id="sidekick-drag-handle"]:hover {
+    background: rgba(79, 70, 229, 0.45);
+}
+
+.sidekick-resizer-right,
+.sidekick-resizer-left {
+    cursor: ew-resize !important;
+}
+
+.sidekick-resizer-top,
+.sidekick-resizer-bottom {
+    cursor: ns-resize !important;
+}

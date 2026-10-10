@@ -1,0 +1,37 @@
+.sidekick-panel {
+    position: fixed !important;
+    z-index: 999999 !important;
+    border: none !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+    transition: all 0.25s ease-in-out !important;
+    background: white !important;
+}
+
+/* Side dock designs */
+.sidekick-right {
+    top: 0 !important;
+    right: 0 !important;
+    width: 380px !important;
+    height: 100vh !important;
+}
+
+.sidekick-left {
+    top: 0 !important;
+    left: 0 !important;
+    width: 380px !important;
+    height: 100vh !important;
+}
+
+.sidekick-top {
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 280px !important;
+}
+
+.sidekick-bottom {
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 280px !important;
+}

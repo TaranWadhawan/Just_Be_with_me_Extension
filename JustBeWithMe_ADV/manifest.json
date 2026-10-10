@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Just Be With ME Pro",
+  "version": "1.0",
+  "description": "An adjustable sidebar companion with routines, notes, flashcards, and reminders.",
+  "permissions": [
+    "storage",
+    "alarms",
+    "notifications",
+    "activeTab",
+    "scripting"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Toggle Sidekick Panel"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["panel.html", "panel.js", "panel.css"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
